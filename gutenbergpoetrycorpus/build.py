@@ -50,7 +50,7 @@ checks = {
     'not_number': lambda prev, line: \
             not(re.search("^\d", line)) and not(re.search("\d$", line)),
     # passes the wordfilter
-    'wordfilter_ok': lambda prev, line: not(wordfilter.blacklisted(line))
+    #'wordfilter_ok': lambda prev, line: not(wordfilter.blacklisted(line))
 }
 
 def err(*args):
@@ -86,13 +86,17 @@ if __name__ == '__main__':
 
     poem_lines = []
     line_count = 0
+    poem_count = 0
     for metadata, text in poetry:
         prev = ""
         for line in text.split("\n"):
             line = clean(line.strip())
             check_results = {k: v(prev, line) for k, v in checks.items()}
             if all(check_results.values()):
-                poem_lines.append((line, metadata['Num']))
+                poem_lines.append((line, metadata['Num'], poem_count))
+            else:
+                # Dirty hack to estimate where poems start and end
+                poem_count += 1
             line_count += 1
             prev = line
 
@@ -101,5 +105,5 @@ if __name__ == '__main__':
 
     err("printing to stdout...")
     for line in poem_lines:
-        print(json.dumps({'s': line[0], 'gid': line[1]}))
+        print(json.dumps({'s': line[0], 'pid': line[2], 'gid': line[1]}))
 
