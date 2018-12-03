@@ -18,7 +18,7 @@ setup(
         'wordfilter'
     ],
     dependency_links=[
-        'https://github.com/aparrish/gutenberg-dammit/archive/master.zip#egg=gutenbergdammit-0.0.2'
+        'https://github.com/JesseAbeyta/gutenberg-dammit/archive/master.zip#egg=gutenbergdammit-0.0.2'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
