@@ -103,7 +103,7 @@ if __name__ == '__main__':
     err("done.")
     err("found", len(poem_lines), "lines of poetry, of", line_count, "total.")
 
-    err("printing to stdout...")
-    for line in poem_lines:
-        print(json.dumps({'s': line[0], 'pid': line[2], 'gid': line[1]}))
+    with open("resulting_corpus.txt", mode = 'w+') as f:        
+        for line in poem_lines:
+            f.write(json.dumps({'s': line[0], 'pid': line[2], 'gid': line[1]}))
 
