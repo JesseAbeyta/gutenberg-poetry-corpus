@@ -106,4 +106,5 @@ if __name__ == '__main__':
     with open("resulting_corpus.txt", mode = 'w+') as f:        
         for line in poem_lines:
             f.write(json.dumps({'s': line[0], 'pid': line[2], 'gid': line[1]}))
+            f.write("\n")
 
